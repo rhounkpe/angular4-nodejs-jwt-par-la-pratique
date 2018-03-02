@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Http } from '@angular/http';
-import 'rxjs/add/operator/map';
+
+import { JobService } from '../services/job.service';
+
 
 @Component({
   selector: 'digitcom-job-list',
@@ -10,16 +11,18 @@ import 'rxjs/add/operator/map';
 export class JobListComponent implements OnInit {
 
   jobs = [];
+  error = '';
 
-  constructor(private http:Http) { }
+  constructor(private jobService:JobService) { }
 
   ngOnInit() {
-    this.http.get('data/jobs.json')
-      .map(res => {
-        this.jobs = res.json();
-        console.log(res.json());
-      })
-      .subscribe();
+    this.jobService.getJobs().subscribe(
+      data => this.jobs = data,
+      error => {
+        console.log(error);
+        this.error = error;
+      }
+    );
   }
 
 }

@@ -7,6 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { SearchComponent } from './search/search.component';
 import { JobListComponent } from './job-list/job-list.component';
+import { JobService } from './services/job.service';
 
 
 @NgModule({
@@ -20,7 +21,9 @@ import { JobListComponent } from './job-list/job-list.component';
     HttpModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    JobService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
