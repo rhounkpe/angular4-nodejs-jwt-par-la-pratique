@@ -9,11 +9,16 @@ import 'rxjs/add/operator/map';
 })
 export class JobListComponent implements OnInit {
 
+  jobs = [];
+
   constructor(private http:Http) { }
 
   ngOnInit() {
     this.http.get('data/jobs.json')
-      .map(res => console.log(res.json()))
+      .map(res => {
+        this.jobs = res.json();
+        console.log(res.json());
+      })
       .subscribe();
   }
 
